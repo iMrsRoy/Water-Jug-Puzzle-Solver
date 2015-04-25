@@ -1,0 +1,341 @@
+<PuzzleRoot>:
+PuzzleRoot:
+
+    cols:1
+    rows:1
+
+    GridLayout:
+        canvas.before:
+            Color:
+                rgba:24,21,200,.2
+            Rectangle:
+                size:self.parent.size
+                pos:self.parent.pos
+
+
+        cols:1
+        rows:4
+        spacing:20
+        padding:[10,10,10,10]
+
+
+
+        Label:
+            id:lb1
+            size_hint_y:.4
+            text:'WATER JUG PUZZLE'
+            font_size:30
+            valign:"middle"
+            font_name:"Arial Black"
+            color:0,0,0,.4
+
+
+
+
+
+        GridLayout:
+
+            id:test
+
+            size_hint_y:1
+            cols:5
+            rows:1
+            spacing:20
+            padding:[20,20,20,20]
+
+            Button:
+                id:jug_a
+                loaded:""
+                val:0
+                menu:"jug_a"
+                text:"Jug A"
+                font_size:18
+                background_color:[25,1,100,.2]
+                size_hint_x:None
+                width:200
+
+                height:self.parent.height
+                size_hint_y:None
+
+                pos_hint:2
+                on_release:root.add_jug_a(self,self.loaded,self.menu,"drop1")
+
+                DropDown:
+
+
+                    id:drop1
+                    background_color:1,1,1,1
+                    on_select:jug_a.text="Jug A:   {}".format(str(args[1]))
+
+            Button:
+                id:jug_b
+                loaded:""
+                val:0
+                menu:"jug_b"
+                text:"Jug B"
+                font_size:18
+                background_color:[25,1,100,.2]
+                size_hint_x:None
+                width:200
+                height:self.parent.height
+                size_hint_y:None
+                pos_hint:1
+#                    pos_hint_x:1
+                on_release:root.add_jug_b(self,self.loaded,self.menu,self.id)
+
+                DropDown:
+                    id:drop2
+                    on_select:jug_b.text="Jug B:   {}".format(str(args[1]))
+
+            Button:
+                id:goal
+                loaded:""
+                menu:"goal"
+                text:"Goal"
+                val:0
+                font_size:18
+                size_hint_x:None
+                background_color:[25,1,100,.2]
+                width:200
+                height:self.parent.height
+                size_hint_y:None
+#                pos_hint:1
+#                    pos_hint_x:1
+                on_release:root.add_goal(self,self.loaded,jug_a.val,jug_b.val)
+
+                DropDown:
+
+                    id:drop3
+                    on_select:goal.text="Goal:   {}".format(str(args[1]))
+
+
+            Button:
+                id:start
+                loaded:""
+                status:"Finish"
+                index:0
+
+                text:"Start"
+                font_size:18
+                size_hint_x:None
+                height:self.parent.height
+                width:200
+                background_color:[0,10,0,.2]
+                size_hint_y:None
+                on_press:root.start(jug_a.val,jug_b.val,goal.val,self,self.status,self.index)
+
+
+
+
+            Button:
+                id:Table
+                loaded:""
+
+                text:"Table"
+                font_size:18
+                size_hint_x:None
+                width:140
+                height:self.parent.height
+                size_hint_y:None
+
+                pos_x:self.parent.width - 250
+                on_press:root.table(self)
+
+        Carousel:
+            id:car
+            size_hint_y:9
+            GridLayout:
+
+                rows:1
+                cols:2
+
+                spacing:10
+                padding:[10,10,10,10]
+    #            Button:
+    #                text:"ah"
+
+                GridLayout: #steps
+
+                    rows:2
+                    cols:1
+                    size_hint_x:2
+
+                    Button:
+                        size_hint_y:1
+                        text:'Steps'
+                        font_size:20
+                        background_color:[0,0,0,0.4]
+
+                    ScrollView: #steps
+                        id:scr1
+                        do_scroll_y:True
+                        size_hint_y:9
+
+
+                        canvas.before:
+                            Color:
+                                rgba:0,0,0,.3
+                            Rectangle:
+                                pos:self.parent.pos
+                                size:self.parent.size
+
+                        GridLayout:
+                            id:stack1
+                            spacing:5
+                            size_hint_y:None
+                            cols:1
+
+                            height:self.minimum_height
+
+
+
+
+
+
+                GridLayout:
+                    rows:2
+                    cols:1
+                    size_hint_x:1
+
+                    Button:
+                        size_hint_y:1
+                        text:'Current Jar Status'
+                        font_size:20
+                        background_color:[0,0,0,0.4]
+
+                    ScrollView: # jug status
+                        id:scr2
+                        do_scroll_y:True
+
+                        size_hint_y:9
+                        canvas.before:
+                            Color:
+                                rgba:0,0,0,.3
+                            Rectangle:
+                                pos:self.parent.pos
+                                size:self.parent.size
+                        GridLayout:
+                            cols:1
+                            id:stack2
+                            size_hint_y:None
+                            spacing:5
+                            height:self.minimum_height
+
+
+            ScrollView:
+                id:scr
+                padding_x:15
+#                do_scroll_y:True
+#                GridLayout:
+#                    height:scr.height
+##                    pos:scr.pos
+#                    cols:1
+#                    size_hint_y:None
+                Label:
+                    id:lbl_table
+                    canvas.before:
+                        Color:
+                            rgba: [0, 0, 0,0.4]
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    size_hint_y:None
+                    height:scr.height
+                    font_size:20
+                    halign:"center"
+                    valign:"top"
+                    strip:False
+
+
+                    pos:car.pos
+
+                    text_size:self.width,None
+
+
+
+                    height:self.texture_size[1]
+
+
+
+
+
+
+
+
+
+
+
+
+<Nums_juga@Button>:
+    id:nums
+    drop:""
+#    val:None
+    background_color:[1,1,1,.5]
+    size_hint_y:None
+    height:44
+
+    on_press:
+        app.root.ids.drop1.select(self.text)
+#        app.root.jug_a=self.text
+        app.root.ids.jug_a.val=int(self.text)
+
+
+<Nums_jugb@Button>:
+    id:nums
+    drop:""
+#    val:None
+
+    background_color:[1,1,1,.5]
+    size_hint_y:None
+    height:44
+
+    on_press:
+        app.root.ids.drop2.select(self.text)
+#        app.root.jug_b=self.text
+        app.root.ids.jug_b.val=int(self.text)
+
+<Nums_goal@Button>:
+    id:nums
+    drop:""
+#    val:None
+    background_color:[1,1,1,.5]
+    size_hint_y:None
+    height:44
+    on_press:
+        app.root.ids.drop3.select(self.text)
+        self.val=self.text
+        app.root.ids.goal.val=int(self.text)
+
+
+<Steps@Button>:
+    id:steps1
+    text:"here"
+    size_hint_y:None
+    background_color:[0,0,0,1]
+    height:100
+    on_press:app.root.highlight(self,self.parent,self.parent.children.index(self))
+<Status@GridLayout>:
+    id:status1
+
+    cols:2
+    rows:1
+    size_hint_y:None
+    height:100
+    spacing:5
+#    width:self.parent.width
+    Button:
+        id:btn_jug_a
+
+        size_hint_y:1
+#        height:self.parent.height
+#        text:"JUG A: 5"
+        height:100
+        background_color:[0,0,0,1]
+    Button:
+        id:btn_jug_b
+
+        size_hint_y:1
+        background_color:[0,0,0,1]
+#        height:self.parent.height
+        height:100
+#        text:"JUG B: 0"
