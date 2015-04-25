@@ -80,7 +80,6 @@ PuzzleRoot:
                 height:self.parent.height
                 size_hint_y:None
                 pos_hint:1
-#                    pos_hint_x:1
                 on_release:root.add_jug_b(self,self.loaded,self.menu,self.id)
 
                 DropDown:
@@ -99,8 +98,6 @@ PuzzleRoot:
                 width:200
                 height:self.parent.height
                 size_hint_y:None
-#                pos_hint:1
-#                    pos_hint_x:1
                 on_release:root.add_goal(self,self.loaded,jug_a.val,jug_b.val)
 
                 DropDown:
@@ -151,9 +148,7 @@ PuzzleRoot:
 
                 spacing:10
                 padding:[10,10,10,10]
-    #            Button:
-    #                text:"ah"
-
+                
                 GridLayout: #steps
 
                     rows:2
@@ -225,12 +220,7 @@ PuzzleRoot:
             ScrollView:
                 id:scr
                 padding_x:15
-#                do_scroll_y:True
-#                GridLayout:
-#                    height:scr.height
-##                    pos:scr.pos
-#                    cols:1
-#                    size_hint_y:None
+
                 Label:
                     id:lbl_table
                     canvas.before:
@@ -269,21 +259,19 @@ PuzzleRoot:
 <Nums_juga@Button>:
     id:nums
     drop:""
-#    val:None
     background_color:[1,1,1,.5]
     size_hint_y:None
     height:44
 
     on_press:
         app.root.ids.drop1.select(self.text)
-#        app.root.jug_a=self.text
         app.root.ids.jug_a.val=int(self.text)
 
 
 <Nums_jugb@Button>:
     id:nums
     drop:""
-#    val:None
+
 
     background_color:[1,1,1,.5]
     size_hint_y:None
@@ -291,13 +279,11 @@ PuzzleRoot:
 
     on_press:
         app.root.ids.drop2.select(self.text)
-#        app.root.jug_b=self.text
         app.root.ids.jug_b.val=int(self.text)
 
 <Nums_goal@Button>:
     id:nums
     drop:""
-#    val:None
     background_color:[1,1,1,.5]
     size_hint_y:None
     height:44
@@ -322,20 +308,13 @@ PuzzleRoot:
     size_hint_y:None
     height:100
     spacing:5
-#    width:self.parent.width
     Button:
         id:btn_jug_a
-
         size_hint_y:1
-#        height:self.parent.height
-#        text:"JUG A: 5"
         height:100
         background_color:[0,0,0,1]
     Button:
         id:btn_jug_b
-
         size_hint_y:1
         background_color:[0,0,0,1]
-#        height:self.parent.height
         height:100
-#        text:"JUG B: 0"
