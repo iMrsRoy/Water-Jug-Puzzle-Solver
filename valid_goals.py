@@ -8,17 +8,11 @@ def isPrime(num,divisor):
      return "False"
 
 def check_validity(jug_a,jug_b):
-
     if jug_b==0:
         print "ha"
         return jug_a
     else:
         return check_validity(jug_b,jug_a%jug_b)
-
-
-
-
-
 
 
 def valid_goals(jug_a,jug_b):
@@ -31,7 +25,6 @@ def valid_goals(jug_a,jug_b):
         return res
     else:
         res=range(1,jug_a+1)
-
         return res
 
 
@@ -39,5 +32,5 @@ def valid_goals(jug_a,jug_b):
 
 
 
-print valid_goals(8,4)
+
 
