@@ -11,31 +11,21 @@ class Searches(object):
         self.jug_b=jug_b
         self.start=(0,0)
         self.end=(goal,0)
-
         self.transition_database={}
         self.display_table=self.create_table(self.jug_a,self.jug_b)
         self.steps=self.prepare_steps(self.jug_a,self.jug_b)
 
-
-
-
     def create_table(self,jug_a,jug_b):
         table=PrettyTable(["State","a","b","c","d","e","f","g","h"]) # creating header
-
         table.align["State"]="l"
         state=list(itertools.product(range(jug_a+1),range(jug_b+1)))
         for data in state:
             row=[data,calc.a(data,jug_a,jug_b),calc.b(data,jug_a,jug_b),calc.c(data,jug_a,jug_b),calc.d(data,jug_a,jug_b),calc.e(data,jug_a,jug_b),calc.f(data,jug_a,jug_b),calc.g(data,jug_a,jug_b),calc.h(data,jug_a,jug_b)]
-
             self.transition_database[row[0]]=row[1:]
             table.add_row(row)
         return table.get_string()
 
-
-
     def prepare_steps(self,jug_a,jug_b):
-
-
         steps={ 0: "Fill the {} gallon jug.".format(jug_a),
                 1: "Fill the {} gallon jug.".format(jug_b),
                 2: "Empty the {} gallon jug.".format(jug_a),
@@ -46,12 +36,6 @@ class Searches(object):
                 7: "Empty water from {} gallon into {} gallon jug.".format(jug_b,jug_a)}
         return steps
 
-
-
-
-
-
-
     def breadth_first(self):
             visited=[]
             nodes=Queue()
@@ -60,88 +44,39 @@ class Searches(object):
             step=['Start with empty jugs.']
             result={}
 
-
             for n,i in enumerate(self.transition_database[self.start]):
                 if i not in visited and type(i) is tuple:
                     visited.append(i)
                     nodes.put([(self.start),(i,n)])
-                    # print [(start),(i,n)]
-                    # print visited
-
-
-
-
+                    
+                    
             while not nodes.empty():
-
                 curr=nodes.get()
-                # print "curr",curr,"\n"
-
                 for n,i in enumerate(self.transition_database[curr[-1][0]]):
 
-                    # print n,i
-
                     if i==self.end:
-                        # print "hahahahaha",i
                         final=[]
-                        # print "fouund"
-                        # print i
                         curr=curr+[(i,n)]
-                        # print "final",curr
                         exit=1
-
 
                         for i in curr:
                             if i!=(0,0):
                                 step.append(self.steps[i[-1]])
-
-
-                        # print step
-
                         result["steps"]=step
                         for i in curr:
                             if i!=(0,0):
-                                # print"go", i
                                 final.append(i[0])
                             else:
                                 final.append((0,0))
-
                         result['state sequence']=final
-
-
-
-                        # print "FINALLLLLL",final
                         break
-
-
                     elif i not in visited and type(i) is tuple:
-
-                        # print "here"
                         visited.append(i)
-
                         nodes.put(curr+[(i,n)])
-
                     else:
                         pass
-                        # print curr
-                        # print i
-
-
-
-                # print visited
                 if exit==1:
                     print "exit"
                     break
 
             return result
-
-# a=Searches(7,4,5)
-# print a.go
-# print a.end
-# print a.transition_database
-#
-#
-# k=a.breadth_first()
-
-# print Searches(7,3,5).breadth_first()["steps"]
-# print Searches(7,3,5).breadth_first()["state sequence"]
-# print k["state sequence"]
