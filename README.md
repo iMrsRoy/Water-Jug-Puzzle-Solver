@@ -1,4 +1,4 @@
 # Water-Jug-Puzzle-Solver
-The program provides user friendly step by step solution to a water jug puzzle.
+This user friendly system provides step by step solution to a water jug puzzle.
 
 
