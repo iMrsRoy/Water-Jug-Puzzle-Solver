@@ -1,4 +1,4 @@
 # Water-Jug-Puzzle-Solver
 This user friendly system provides step by step solution to a water jug puzzle.
 
-<img src="http://i.imgur.com/nPkVRHL.png" height=100 width=100>
+<img src="http://i.imgur.com/nPkVRHL.png" height=250 width=250>
